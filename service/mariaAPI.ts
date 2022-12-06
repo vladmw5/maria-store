@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Credentials } from "./model";
 
-const BASE_URL = "localhost:8000";
+const BASE_URL = "http://localhost:8000/";
 
 axios.defaults.baseURL = BASE_URL;
 
@@ -14,9 +14,9 @@ export const authHeader = {
   },
 };
 
-const registerEndpoint = "/register";
-const loginEndpoint = "/login";
-const logoutEndpoint = "/logout";
+const registerEndpoint = "registration";
+const loginEndpoint = "login";
+const logoutEndpoint = "logout";
 
 export const sendRegisterCredentialsQuery = (credentials: Credentials) =>
   axios.post(registerEndpoint, credentials);

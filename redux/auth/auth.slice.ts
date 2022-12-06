@@ -2,6 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import * as authOperations from "./auth.operations";
 
 export interface AuthState {
+  user: {
+    role: "user" | "admin";
+    _id: "string";
+  } | null;
   token: string;
   isLoggedIn: boolean;
   isLoggingIn: boolean;
@@ -13,6 +17,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
+  user: null,
   token: "",
   isLoggedIn: false,
   isLoggingIn: false,
@@ -37,7 +42,8 @@ const authSlice = createSlice({
       state: AuthState,
       { payload }
     ) => {
-      state.token = payload.token;
+      state.token = payload.accessToken;
+      state.user = { ...payload.user };
       state.isLoggedIn = true;
       state.isLoggingIn = false;
     },
@@ -55,7 +61,8 @@ const authSlice = createSlice({
       state: AuthState,
       { payload }
     ) => {
-      state.token = payload.token;
+      state.token = payload.accessToken;
+      state.user = { ...payload.user };
       state.isLoggedIn = true;
       state.isLoggingIn = false;
     },

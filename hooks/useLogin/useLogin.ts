@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import * as authSelectors from "../../redux/auth/auth.selectors";
 
 const useLogin = () => {
+  const user = useSelector(authSelectors.getUser);
   const token = useSelector(authSelectors.getToken);
   const isLoggingIn = useSelector(authSelectors.getIsLoggingIn);
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
@@ -12,6 +13,7 @@ const useLogin = () => {
   const hasRegisterError = useSelector(authSelectors.getHasRegisterError);
 
   return {
+    user,
     token,
     isLoggedIn,
     isLoggingIn,

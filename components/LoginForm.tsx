@@ -7,6 +7,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import useLogin from "../hooks/useLogin";
 import { login } from "../redux/auth/auth.operations";
+import { AnyAction } from "@reduxjs/toolkit";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const LoginForm = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    //TODO add Redux Dispatch
+    dispatch(login({ email, password }) as unknown as AnyAction);
   };
 
   return (
@@ -45,7 +46,7 @@ const LoginForm = () => {
         />
         <PasswordInput value={password} onChange={handleChange} />
         <Stack spacing={2} align="center" w="100%">
-          <Button type="submit" boxShadow="md" w="100%" onSubmit={handleSubmit}>
+          <Button type="submit" boxShadow="md" w="100%" onClick={handleSubmit}>
             Log In
           </Button>
           {hasFailedToLogin && (

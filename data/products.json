@@ -1,0 +1,29 @@
+[
+  {
+    "id": "string",
+    "title": "string",
+    "pricePerQuantity": "number",
+    "measurement": "string",
+    "stockAmount": "number",
+    "productImage": "string",
+    "category": "string"
+  },
+  {
+    "id": "string",
+    "title": "string",
+    "pricePerQuantity": "number",
+    "measurement": "string",
+    "stockAmount": "number",
+    "productImage": "string",
+    "category": "string"
+  },
+  {
+    "id": "string",
+    "title": "string",
+    "pricePerQuantity": "number",
+    "measurement": "string",
+    "stockAmount": "number",
+    "productImage": "string",
+    "category": "string"
+  }
+]

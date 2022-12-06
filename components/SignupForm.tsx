@@ -1,12 +1,17 @@
 import { useState, ChangeEvent } from "react";
 import { FormControl, Stack, FormErrorMessage, Text } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { AnyAction } from "redux";
 import NextLink from "./NextLink";
 import PasswordInput from "../components/PasswordInput";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import useLogin from "../hooks/useLogin";
+import { register } from "../redux/auth/auth.operations";
 
-const LoginForm = () => {
-  const hasFailedToLogin = false; //TODO add Redux auth state
+const SignupForm = () => {
+  const dispatch = useDispatch();
+  const { hasRegisterError: hasFailedToLogin } = useLogin();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +32,7 @@ const LoginForm = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    //TODO add Redux Dispatch
+    dispatch(register({ email, password }) as unknown as AnyAction);
   };
 
   return (
@@ -41,7 +46,7 @@ const LoginForm = () => {
         />
         <PasswordInput value={password} onChange={handleChange} />
         <Stack spacing={2} align="center" w="100%">
-          <Button type="submit" boxShadow="md" w="100%" onSubmit={handleSubmit}>
+          <Button type="submit" boxShadow="md" w="100%" onClick={handleSubmit}>
             Sign Up
           </Button>
           {hasFailedToLogin && (
@@ -56,4 +61,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

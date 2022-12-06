@@ -1,0 +1,9 @@
+{
+  "id": "string",
+  "title": "string",
+  "pricePerQuantity": "number",
+  "measurement": "string",
+  "stockAmount": "number",
+  "productBigImage": "string",
+  "description": "string"
+}

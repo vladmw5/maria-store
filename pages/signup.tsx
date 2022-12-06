@@ -4,8 +4,10 @@ import { Center, Stack, Text } from "@chakra-ui/react";
 import Logo from "../components/Logo";
 import SignupForm from "../components/SignupForm";
 import Layout from "../components/Layout";
+import useRestrict from "../hooks/useRestrict";
 
 const Signup = () => {
+  useRestrict();
   return (
     <>
       <Head>

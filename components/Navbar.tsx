@@ -1,8 +1,10 @@
 import NavLink from "./NavLink";
 import { Flex } from "@chakra-ui/react";
 
+import useLogin from "../hooks/useLogin";
+
 const Navbar = () => {
-  const isLoggedIn = false; //TODO Add Auth selector
+  const { isLoggedIn } = useLogin();
 
   return (
     <Flex alignItems="center" h="100%">

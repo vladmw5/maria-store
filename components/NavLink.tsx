@@ -7,6 +7,7 @@ export interface NavLinkProps {
   href: string;
   exact: boolean;
   children: ReactNode;
+  onClick?: () => void;
 }
 
 const beforeStyles: SystemStyleObject = {

@@ -2,9 +2,18 @@ import NavLink from "./NavLink";
 import { Flex } from "@chakra-ui/react";
 
 import useLogin from "../hooks/useLogin";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/auth/auth.operations";
+import { AnyAction } from "@reduxjs/toolkit";
+import Button from "./Button";
 
 const Navbar = () => {
   const { isLoggedIn } = useLogin();
+  const dispatch = useDispatch();
+
+  const onLogoutClick = () => {
+    dispatch(logout() as unknown as AnyAction);
+  };
 
   return (
     <Flex alignItems="center" h="100%">
@@ -27,9 +36,9 @@ const Navbar = () => {
         </NavLink>
       )}
       {isLoggedIn && (
-        <NavLink href={"/logout"} exact>
+        <Button href={""} exact onClick={onLogoutClick}>
           Log Out
-        </NavLink>
+        </Button>
       )}
     </Flex>
   );

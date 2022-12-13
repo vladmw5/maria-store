@@ -7,6 +7,7 @@ export interface AuthState {
     _id: "string";
   } | null;
   token: string;
+  isAdmin: boolean;
   isLoggedIn: boolean;
   isLoggingIn: boolean;
   isLoggingOut: boolean;
@@ -19,6 +20,7 @@ export interface AuthState {
 const initialState: AuthState = {
   user: null,
   token: "",
+  isAdmin: false,
   isLoggedIn: false,
   isLoggingIn: false,
   isLoggingOut: false,
@@ -44,6 +46,7 @@ const authSlice = createSlice({
     ) => {
       state.token = payload.accessToken;
       state.user = { ...payload.user };
+      state.isAdmin = payload.user.role === "admin";
       state.isLoggedIn = true;
       state.isLoggingIn = false;
     },
@@ -63,6 +66,7 @@ const authSlice = createSlice({
     ) => {
       state.token = payload.accessToken;
       state.user = { ...payload.user };
+      state.isAdmin = payload.user.role === "admin";
       state.isLoggedIn = true;
       state.isLoggingIn = false;
     },
@@ -79,6 +83,8 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.isLoggingOut = false;
       state.token = "";
+      state.user = null;
+      state.isAdmin = false;
     },
     [authOperations.logout.rejected.toString()]: (state: AuthState) => {
       state.isLoggingOut = false;
@@ -86,6 +92,8 @@ const authSlice = createSlice({
     },
     [authOperations.forceLogout.toString()]: (state: AuthState) => {
       state.isLoggedIn = false;
+      state.user = null;
+      state.isAdmin = false;
       state.token = "";
     },
   },

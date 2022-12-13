@@ -4,20 +4,17 @@ import Select from "./Select";
 import sortModes, { mapSortModeToText } from "../utils/sortModes";
 
 export interface SortSelectProps {
-  value: string;
+  value: string | undefined;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const SortSelect = ({ value, onChange }: SortSelectProps) => {
   return (
-    <Select
-      w="180px"
-      placeholder="Sort by Price"
-      value={value}
-      onChange={onChange}
-    >
+    <Select w="180px" placeholder="Sort by" value={value} onChange={onChange}>
       <option value={sortModes.ASC}>{mapSortModeToText(sortModes.ASC)}</option>
-      <option value={sortModes.DESC}>Descending</option>
+      <option value={sortModes.DESC}>
+        {mapSortModeToText(sortModes.DESC)}
+      </option>
     </Select>
   );
 };

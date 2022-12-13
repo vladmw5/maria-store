@@ -2,6 +2,7 @@ import { CoreState } from "../store";
 
 export const getUser = (state: CoreState) => state.auth.user;
 export const getToken = (state: CoreState) => state.auth.token;
+export const getIsAdmin = (state: CoreState) => state.auth.isAdmin;
 export const getIsLoggedIn = (state: CoreState) => state.auth.isLoggedIn;
 export const getIsLoggingIn = (state: CoreState) => state.auth.isLoggingIn;
 export const getIsLoggingOut = (state: CoreState) => state.auth.isLoggingOut;

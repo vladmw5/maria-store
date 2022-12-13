@@ -12,7 +12,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <Box minH="100vh" bgColor="gray.50">
-      <Box h="80px" bgColor="gray.100" position="sticky" top={0}>
+      <Box h="80px" bgColor="gray.100" position="sticky" top={0} zIndex={1000}>
         <Container>
           <Flex align="center" alignItems="center" h="100%">
             <PageLogo />

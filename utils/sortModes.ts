@@ -1,15 +1,15 @@
 const sortModes = {
-  DEF: "",
-  ASC: "asc",
-  DESC: "desc",
+  DEF: undefined,
+  ASC: "price",
+  DESC: "name",
 };
 
 export const mapSortModeToText = (sortMode: string) => {
   switch (sortMode) {
     case sortModes.ASC:
-      return "Ascending";
+      return "Price";
     case sortModes.DESC:
-      return "Descending";
+      return "Name";
     default:
       return "Default";
   }

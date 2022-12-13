@@ -8,7 +8,7 @@ import { AnyAction } from "@reduxjs/toolkit";
 import Button from "./Button";
 
 const Navbar = () => {
-  const { isLoggedIn } = useLogin();
+  const { isLoggedIn, isAdmin } = useLogin();
   const dispatch = useDispatch();
 
   const onLogoutClick = () => {
@@ -35,11 +35,17 @@ const Navbar = () => {
           Cart
         </NavLink>
       )}
-      {isLoggedIn && (
-        <Button href={""} exact onClick={onLogoutClick}>
-          Log Out
-        </Button>
+      {isAdmin && (
+        <NavLink href={"/products/create"} exact>
+          Add Product
+        </NavLink>
       )}
+      {isAdmin && (
+        <NavLink href={"/orders/list"} exact>
+          Orders
+        </NavLink>
+      )}
+      {isLoggedIn && <Button onClick={onLogoutClick}>Log Out</Button>}
     </Flex>
   );
 };

@@ -3,15 +3,24 @@ import { Stack } from "@chakra-ui/react";
 import SearchBar from "./SearchBar";
 import sortModes from "../utils/sortModes";
 
+interface ProductControllerProps {
+  sortOrder: string | undefined;
+  searchQuery: string;
+  setSearchQuery: Function;
+  setSortOrder: Function;
+}
+
 const initialState = {
   searchQuery: "",
   sortOrder: sortModes.DEF,
 };
 
-const ProductController = () => {
-  const [searchQuery, setSearchQuery] = useState(initialState.searchQuery);
-  const [sortOrder, setSortOrder] = useState(initialState.sortOrder);
-
+const ProductController = ({
+  sortOrder,
+  searchQuery,
+  setSearchQuery,
+  setSortOrder,
+}: ProductControllerProps) => {
   const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };

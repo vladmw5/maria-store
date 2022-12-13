@@ -1,8 +1,36 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
 import ProductController from "../components/ProductController";
+import ProductGrid from "../components/ProductGrid";
+import sortModes from "../utils/sortModes";
+import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "react-query";
+import { getAllProductsQuery } from "../service/mariaAPI";
+import Loader from "../components/Loader";
+
+const initialState = {
+  searchQuery: "",
+  sortOrder: sortModes.DEF,
+};
 
 export default function Home() {
+  const [search, setSearch] = useState(initialState.searchQuery);
+  const [sortBy, setSortBy] = useState(initialState.sortOrder);
+
+  const queryClient = useQueryClient();
+  const { data, isLoading, error } = useQuery(
+    ["getProducts", search, sortBy],
+    async () => {
+      const data = await getAllProductsQuery({
+        page: 1,
+        quantityPerPage: 1000,
+        search: search,
+        sortBy: sortBy === "" ? undefined : sortBy,
+      });
+      return data;
+    }
+  );
+
   return (
     <div>
       <Head>
@@ -11,7 +39,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <ProductController />
+        <ProductController
+          searchQuery={search}
+          setSearchQuery={setSearch}
+          sortOrder={sortBy}
+          setSortOrder={setSortBy}
+        />
+        {isLoading ? <Loader /> : <ProductGrid products={data?.data} />}
       </Layout>
     </div>
   );

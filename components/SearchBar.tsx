@@ -6,7 +6,7 @@ import SortSelect from "./SortSelect";
 
 export interface SearchBarProps {
   query: string;
-  sortOrder: string;
+  sortOrder: string | undefined;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSortSelect: (e: ChangeEvent<HTMLSelectElement>) => void;
   onClearSettingClick: (e: React.MouseEvent<HTMLButtonElement>) => void;

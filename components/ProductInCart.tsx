@@ -19,7 +19,7 @@ const ProductInCart = ({ id, quantity }: ProductInCartProps) => {
     }
   });
   return (
-    <Box height="60px" bgColor="gray.200" px="40px" py="4px">
+    <Box height="60px" bgColor="gray.200" px="40px" py="4px" rounded="4px">
       <Flex alignItems={"center"} h="100%" justifyContent="space-between">
         {isLoading ? (
           <Loader text="Fetching product data..." />

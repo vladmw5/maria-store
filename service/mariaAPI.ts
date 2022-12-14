@@ -6,7 +6,7 @@ import {
   Order,
 } from "./model";
 
-const BASE_URL = "http://localhost:8000/";
+const BASE_URL = "http://localhost:8000";
 export const TEMPLATE_IMAGE_URL = "https://reactjs.org/logo-og.png";
 
 axios.defaults.baseURL = BASE_URL;
@@ -44,7 +44,7 @@ export const createProductQuery = (product: ProductSchema) =>
   axios.post(productsEndpoint, product);
 
 export const changeProductQuery = (id: string, product: ProductSchema) =>
-  axios.patch(`${productsEndpoint}/${id}`);
+  axios.patch(`${productsEndpoint}/${id}`, product);
 
 export const deleteProductQuery = (id: string) =>
   axios.delete(`${productsEndpoint}/${id}`);
@@ -53,3 +53,6 @@ export const sendOrderQuery = (order: Order) =>
   axios.post(ordersEndpoint, order);
 
 export const getAllOrdersQuery = () => axios.get(ordersEndpoint);
+
+export const getOrderByIdQuery = (id: string) =>
+  axios.get(`${ordersEndpoint}/${id}`);

@@ -1,10 +1,10 @@
 import Layout from "../../components/Layout";
-import { Stack, Text } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { getAllOrdersQuery } from "../../service/mariaAPI";
 import Loader from "../../components/Loader";
 import { OrderResponseObject } from "../../service/model";
-import OrderCard from "../../components/orderCard";
+import OrderCard from "../../components/OrderCard";
 
 const OrdersPage = () => {
   const { data, isLoading, error } = useQuery(

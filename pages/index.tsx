@@ -13,7 +13,7 @@ export const initialState = {
   searchQuery: "",
   sortOrder: sortModes.DEF,
   minPrice: 1,
-  maxPrice: 2500,
+  maxPrice: 9e20,
   isOnlyAvailable: false,
   types: [],
 };
@@ -51,21 +51,9 @@ export default function Home() {
   });
 
   useEffect(() => {
-    if (data?.data.length > 0) {
-      let minPrice = data?.data[0].price;
-      let maxPrice = data?.data[0].price;
-      data?.data.forEach((product: any) => {
-        if (product.price < minPrice) {
-          minPrice = product.price;
-        }
-        if (product.price > maxPrice) {
-          maxPrice = product.price;
-        }
-      });
-      setMinPrice(minPrice);
-      setMaxPrice(maxPrice);
-    }
-  }, [data]);
+    setMinPrice(typesData?.data.minPrice);
+    setMaxPrice(typesData?.data.maxPrice);
+  }, [typesData]);
 
   return (
     <div>

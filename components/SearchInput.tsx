@@ -21,7 +21,7 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
         roundedBottomLeft={0}
         roundedTopLeft={0}
         name="searchQuery"
-        w="400px"
+        w="320px"
       />
     </InputGroup>
   );

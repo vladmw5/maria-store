@@ -56,3 +56,5 @@ export const getAllOrdersQuery = () => axios.get(ordersEndpoint);
 
 export const getOrderByIdQuery = (id: string) =>
   axios.get(`${ordersEndpoint}/${id}`);
+
+export const getAllCategories = () => axios.get(`${productsEndpoint}/helpers`);

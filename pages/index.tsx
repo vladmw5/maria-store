@@ -3,33 +3,69 @@ import Layout from "../components/Layout";
 import ProductController from "../components/ProductController";
 import ProductGrid from "../components/ProductGrid";
 import sortModes from "../utils/sortModes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getAllProductsQuery } from "../service/mariaAPI";
 import Loader from "../components/Loader";
+import { getAllCategories } from "../service/mariaAPI";
 
-const initialState = {
+export const initialState = {
   searchQuery: "",
   sortOrder: sortModes.DEF,
+  minPrice: 1,
+  maxPrice: 2500,
+  isOnlyAvailable: false,
+  types: [],
 };
 
 export default function Home() {
   const [search, setSearch] = useState(initialState.searchQuery);
   const [sortBy, setSortBy] = useState(initialState.sortOrder);
+  const [minPrice, setMinPrice] = useState(initialState.minPrice);
+  const [maxPrice, setMaxPrice] = useState(initialState.maxPrice);
+  const [isOnlyAvailable, setIsOnlyAvailable] = useState(
+    initialState.isOnlyAvailable
+  );
+  const [types, setTypes] = useState(initialState.types);
 
   const queryClient = useQueryClient();
   const { data, isLoading, error } = useQuery(
-    ["getProducts", search, sortBy],
+    ["getProducts", search, sortBy, maxPrice, minPrice, isOnlyAvailable, types],
     async () => {
       const data = await getAllProductsQuery({
         page: 1,
         quantityPerPage: 1000,
         search: search,
         sortBy: sortBy === "" ? undefined : sortBy,
+        maxPrice: maxPrice,
+        minPrice: minPrice,
+        isOnlyAvailable: isOnlyAvailable,
+        types: types,
       });
       return data;
     }
   );
+  const { data: typesData } = useQuery("fetchCategories", async () => {
+    const data = await getAllCategories();
+    return data;
+  });
+
+  useEffect(() => {
+    if (data?.data.length > 0) {
+      let minPrice = data?.data[0].price;
+      let maxPrice = data?.data[0].price;
+      data?.data.forEach((product: any) => {
+        if (product.price < minPrice) {
+          minPrice = product.price;
+        }
+        if (product.price > maxPrice) {
+          maxPrice = product.price;
+        }
+      });
+      setMinPrice(minPrice);
+      setMaxPrice(maxPrice);
+    }
+  }, [data]);
 
   return (
     <div>
@@ -44,6 +80,15 @@ export default function Home() {
           setSearchQuery={setSearch}
           sortOrder={sortBy}
           setSortOrder={setSortBy}
+          minPrice={typesData?.data.minPrice}
+          setMinPrice={setMinPrice}
+          maxPrice={typesData?.data.maxPrice}
+          setMaxPrice={setMaxPrice}
+          isOnlyAvailable={isOnlyAvailable}
+          setIsOnlyAvailable={setIsOnlyAvailable}
+          types={types}
+          setTypes={setTypes}
+          allCategories={typesData?.data.types}
         />
         {isLoading ? <Loader /> : <ProductGrid products={data?.data} />}
       </Layout>

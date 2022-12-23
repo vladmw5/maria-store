@@ -11,10 +11,11 @@ const OrdersDetailPage = () => {
   const { data } = useQuery(["fetchProductById", _id], async () => {
     if (typeof _id === "string") {
       const data = await getOrderByIdQuery(_id);
+      console.log(data);
       return data;
     }
   });
-  console.log(data?.data);
+  console.log(data?.data.createdAt);
   return (
     <Layout>
       <Center py="30px">
@@ -29,14 +30,14 @@ const OrdersDetailPage = () => {
             spacing={8}
           >
             <Text fontSize="3xl" as="b" color="blackAlpha.800">
-              Order <Text as="samp"> {data?.data._doc._id}</Text>
+              Order <Text as="samp"> {data?.data._id}</Text>
             </Text>
             <Flex w="100%" justifyContent="space-between">
               <Text fontSize="18px" as="b">
-                {parseDate(data?.data._doc.createdAt)}
+                {data?.data.createdAt && parseDate(data?.data.createdAt)}
               </Text>
               <Text fontSize="18px" as="b">
-                {data?.data._doc.userId.email}
+                {data?.data.userId.email}
               </Text>
               <Text fontSize="18px" as="b">
                 {data?.data.totalPrice}$
@@ -44,8 +45,8 @@ const OrdersDetailPage = () => {
             </Flex>
           </Stack>
           <Stack>
-            {data?.data._doc.items.length > 0 ? (
-              data?.data._doc.items.map((item: any) => (
+            {data?.data.items.length > 0 ? (
+              data?.data.items.map((item: any) => (
                 <ProductInOrder
                   key={item.productId}
                   id={item.productId}

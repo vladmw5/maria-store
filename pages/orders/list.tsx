@@ -19,7 +19,7 @@ const OrdersPage = () => {
           <Loader />
         ) : (
           data?.data.map((order: OrderResponseObject) => (
-            <OrderCard key={order?._doc?._id} order={order} />
+            <OrderCard key={order?._id} order={order} />
           ))
         )}
       </Stack>

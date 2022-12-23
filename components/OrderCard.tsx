@@ -10,13 +10,13 @@ export interface OrderCardProps {
 const OrderCard = ({ order }: OrderCardProps) => {
   return (
     <Box h="40px" px="20px" py="4px">
-      <Link href={`/orders/detail?_id=${order?._doc._id}`}>
+      <Link href={`/orders/detail?_id=${order?._id}`}>
         <Flex justifyContent="space-between">
           <Text fontSize="18px" as="b">
-            {parseDate(order?._doc.createdAt)}
+            {parseDate(order?.createdAt)}
           </Text>
           <Text fontSize="18px" as="b">
-            {order?._doc.userId.email}
+            {order?.userId.email}
           </Text>
           <Text fontSize="18px" as="b">
             {order?.totalPrice}$

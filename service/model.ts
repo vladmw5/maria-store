@@ -36,15 +36,12 @@ export interface CartObject {
 
 export interface OrderResponseObject {
   totalPrice: number;
-  _doc: {
-    createdAt: string;
-    items: CartObject[];
-    updatedAt: string;
-    userId: {
-      email: string;
-      _id: string;
-    };
-    __v: number;
+  __v: number;
+  _id: string;
+  createdAt: string;
+  items: any[];
+  userId: {
+    email: string;
     _id: string;
   };
 }
